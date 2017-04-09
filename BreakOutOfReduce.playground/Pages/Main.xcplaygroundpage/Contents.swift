@@ -75,7 +75,7 @@ extension Sequence {
     func reduce<Result>(
         _ initialResult: Result,
         _ nextPartialResult: (Result, Self.Iterator.Element) throws -> Result,
-        while conditionPassForResult: (Result, Self.Iterator.Element) -> Bool
+        while conditionPassFor: (Result, Self.Iterator.Element) -> Bool
         ) rethrows -> Result {
         
         do {
@@ -83,7 +83,7 @@ extension Sequence {
                 initialResult,
                 {
                     let _nextPartialResult = try nextPartialResult($0, $1)
-                    if conditionPassForResult(_nextPartialResult, $1) {
+                    if conditionPassFor(_nextPartialResult, $1) {
                         return _nextPartialResult
                     }
                     else {
